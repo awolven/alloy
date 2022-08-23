@@ -38,10 +38,10 @@
   (constrain-visibility (extent 0 0 (size-w size) (size-h size)) renderer))
 
 (defmethod reset-visibility ((renderer renderer))
-  (setf (extent-x (visible-bounds renderer)) (px most-negative-single-float))
-  (setf (extent-y (visible-bounds renderer)) (px most-negative-single-float))
-  (setf (extent-w (visible-bounds renderer)) (px float-features:single-float-positive-infinity))
-  (setf (extent-h (visible-bounds renderer)) (px float-features:single-float-positive-infinity)))
+  (setf (extent-x (visible-bounds renderer)) (load-time-value (%px most-negative-single-float)))
+  (setf (extent-y (visible-bounds renderer)) (load-time-value (%px most-negative-single-float)))
+  (setf (extent-w (visible-bounds renderer)) (load-time-value (%px float-features:single-float-positive-infinity)))
+  (setf (extent-h (visible-bounds renderer)) (load-time-value (%px float-features:single-float-positive-infinity))))
 
 (defmethod translate :before ((renderer renderer) (point point))
   (let ((bounds (visible-bounds renderer)))
