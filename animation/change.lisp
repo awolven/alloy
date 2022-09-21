@@ -11,7 +11,7 @@
         (comparators ())
         (tween-infos ()))
     (dolist (tracker trackers (list extractors comparators tween-infos))
-      (destructuring-bind (extractor &key (duration 1.0) (easing 'linear) (comparison 'equalp)) tracker
+      (destructuring-bind (extractor &key (duration 1.0f0) (easing 'linear) (comparison 'equalp)) tracker
         (push extractor extractors)
         (push comparison comparators)
         (push (list :duration duration :easing easing) tween-infos)))))
@@ -19,7 +19,7 @@
 (defun compile-tween (extractor old-val new-val info)
   (destructuring-bind (&key duration easing) info
     `(make-tween #'(setf ,extractor)
-                 ,(%expand-array (list 0.0 duration) :element-type 'single-float)
+                 ,(%expand-array (list 0.0f0 duration) :element-type 'single-float)
                  ,(%expand-array (list old-val new-val))
                  ,(%expand-array (list `(load-time-value (easing ',easing)))))))
 
@@ -37,4 +37,4 @@
                               (vector-push ,(compile-tween extractor extractor 'new tween-info) animations))))
          (when (< 0 (fill-pointer animations))
            (apply-animation animations ,animated)
-           (update ,animated 0.0))))))
+           (update ,animated 0.0f0))))))

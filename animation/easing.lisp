@@ -124,15 +124,15 @@
         (/ (1+ (sqrt (- 1 (expt x 2)))) 2))))
 
 (define-easing back-in (x)
-  (let ((s 1.70158))
+  (let ((s 1.70158f0))
     (* (expt x 2) (- (* (1+ s) x) s))))
 
 (define-easing back-out (x)
-  (let ((s 1.70158))
+  (let ((s 1.70158f0))
     (1+ (* (expt x 2) (+ (* (1+ s) x) s)))))
 
 (define-easing back-in-out (x)
-  (let ((s (* 1.70158 1.525))
+  (let ((s (* 1.70158f0 1.525f0))
         (x (* x 2)))
     (if (< x 1)
         (/ (* (expt x 2) (- (* (1+ s) x) s)) 2)
@@ -141,14 +141,14 @@
 (define-easing elastic-in (x)
   (case x
     ((0 1) x)
-    (T (let* ((p 0.3)
+    (T (let* ((p 0.3f0)
               (s (/ p 4)))
          (- (* (expt 2f0 (* x 10)) (float (sin (/ (* (- x s) 2 PI) p)) 0f0)))))))
 
 (define-easing elastic-out (x)
   (case x
     ((0 1) x)
-    (T (let* ((p 0.3)
+    (T (let* ((p 0.3f0)
               (s (/ p 4)))
          (1+ (* (expt 2f0 (* x -10)) (float (sin (/ (* (- x s) 2 PI) p)) 0f0)))))))
 
@@ -156,28 +156,28 @@
   (case x
     ((0 1) x)
     (T (let* ((x (* x 2))
-              (p (* 0.3 1.5))
+              (p (* 0.3f0 1.5f0))
               (s (/ p 4)))
          (if (< x 1)
              (- (/ (* (expt 2 (* (1- x) 10)) (float (sin (/ (* (- (1- x) s) 2 PI) p)) 0f0)) 2))
              (1+ (/ (* (expt 2 (* x -10)) (float (sin (/ (* (- (1- x) s) 2 PI) p)) 0f0)) 2)))))))
 
 (define-easing bounce-out (x)
-  (let ((s 7.5625)
-        (p 2.75))
+  (let ((s 7.5625f0)
+        (p 2.75f0))
     (cond ((< x (/ 1 p))
            (* s (expt x 2)))
           ((< x (/ 2 p))
-           (+ (* s (expt (- x (/ 1.5 p)) 2)) 0.75))
-          ((< x (/ 2.5 p))
-           (+ (* s (expt (- x (/ 2.25 p)) 2)) 0.9375))
+           (+ (* s (expt (- x (/ 1.5f0 p)) 2)) 0.75f0))
+          ((< x (/ 2.5f0 p))
+           (+ (* s (expt (- x (/ 2.25f0 p)) 2)) 0.9375f0))
           (T
-           (+ (* s (expt (- x (/ 2.625 p)) 2)) 0.984375)))))
+           (+ (* s (expt (- x (/ 2.625f0 p)) 2)) 0.984375f0)))))
 
 (define-easing bounce-in (x)
   (- 1 (ease 'bounce-out (- 1 x))))
 
 (define-easing bounce-in-out (x)
-  (if (< x 0.5)
+  (if (< x 0.5f0)
       (/ (ease 'bounce-in (* x 2)) 2)
       (/ (1+ (ease 'bounce-out (1- (* x 2)))) 2)))

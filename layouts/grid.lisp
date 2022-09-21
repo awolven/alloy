@@ -133,7 +133,7 @@
           do (etypecase size
                (unit (decf total (to-px size)))
                ((eql T) (incf count))))
-    (max 0.0 (if (< 0 count)
+    (max 0.0f0 (if (< 0 count)
                  (/ total count)
                  total))))
 

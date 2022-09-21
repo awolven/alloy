@@ -95,6 +95,8 @@
     renderer))
 
 (defun translate-by (renderer pxx pxy)
+  (setq pxx (coerce pxx 'single-float))
+  (setq pxy (coerce pxy 'single-float))
   (let* ((matrix (transform-matrix renderer)))
     (incf (aref matrix 2) (+ (* (aref matrix 0) pxx)
                              (* (aref matrix 1) pxy)))

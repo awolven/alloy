@@ -10,7 +10,7 @@
 
 (presentations:define-animated-shapes animated-button
   (:background
-   (simple:pattern :duration 1.0)))
+   (simple:pattern :duration 1.0f0)))
 
 (define-example animation (screen)
   (let* ((window (windowing:make-window screen))

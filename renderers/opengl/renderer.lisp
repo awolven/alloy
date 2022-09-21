@@ -439,8 +439,8 @@ void main(){
       (simple:translate renderer (simple:bounds shape))
       (simple:scale renderer (simple:bounds shape))
       (setf (uniform shader "transform") (simple:transform-matrix renderer)))
-    (setf (uniform shader "color") color)
-    (setf (uniform shader "line_width") (alloy:to-px (simple:line-width shape)))
+    (setf (uniform shader "color") (if (realp color) (coerce color 'single-float) color))
+    (setf (uniform shader "line_width") (coerce (alloy:to-px (simple:line-width shape)) 'single-float))
     (setf (uniform shader "view_size") (view-size renderer))
     (draw-vertex-array (resource 'rect-line-vao renderer) :triangles 0 24)))
 

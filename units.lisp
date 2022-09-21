@@ -52,7 +52,7 @@
   (float real 0f0))
 
 (defun to-px (thing)
-  (%to-px thing))
+  (coerce (%to-px thing) 'single-float))
 
 (define-compiler-macro to-px (thing &environment env)
   (if (constantp thing env)

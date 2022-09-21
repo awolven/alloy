@@ -33,9 +33,9 @@
     (setf (uniform shader "uv_scale") (simple:scaling image))
     (setf (uniform shader "uv_offset") (simple:offset image))
     (setf (uniform shader "transform") (load-time-value (make-array 9 :element-type 'single-float
-                                                                      :initial-contents '(2.0 0.0 -1.0
-                                                                                          0.0 2.0 -1.0
-                                                                                          0.0 0.0  1.0))))
+                                                                      :initial-contents '(2.0f0 0.0f0 -1.0f0
+                                                                                          0.0f0 2.0f0 -1.0f0
+                                                                                          0.0f0 0.0f0  1.0f0))))
     (draw-vertex-array (resource 'rect-fill-vao renderer) :triangles 0 6)))
 
 (defmethod alloy:render :around ((renderer renderer) (shape simple:patterned-shape))
@@ -84,8 +84,8 @@
          (dx (- bx ax))
          (dy (- by ay))
          ;; KLUDGE: Don't know how to stretch it to infinity.
-         (ex (* 10000.0 (- dy)))
-         (ey (* 10000.0 dx))
+         (ex (* 10000.0f0 (- dy)))
+         (ey (* 10000.0f0 dx))
          (i 0))
     (declare (type (simple-array single-float (*)) array))
     (declare (type (unsigned-byte 16) i))
@@ -100,10 +100,10 @@
                      (tcy (+ ay (* dy tt))))
                  (vertex (- tcx ex) (- tcy ey))
                  (vertex (+ tcx ex) (+ tcy ey)))))
-      (stop -1000.0)
+      (stop -1000.0f0)
       (loop for stop across stops
             do (stop (first stop)))
-      (stop +1000.0))))
+      (stop +1000.0f0))))
 
 (defclass radial-gradient (gradient)
   ((resolution :initform (* 4 16) :accessor resolution)))

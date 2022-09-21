@@ -86,12 +86,12 @@
    (alloy:margins -3)
    :line-width (alloy:un 1))
   ((:switch simple:rectangle)
-   (alloy:extent 0 0 (alloy:pw 0.3) (alloy:ph))))
+   (alloy:extent 0 0 (alloy:pw 0.3f0) (alloy:ph))))
 
 (define-update (default-look-and-feel alloy:switch)
   (:switch
    :offset (alloy:point (if (alloy:active-p alloy:renderable)
-                            (alloy:pw 0.7)
+                            (alloy:pw 0.7f0)
                             0))
    :pattern (case alloy:focus
                  (:strong colors:white)
@@ -187,8 +187,8 @@
 (define-realization (default-look-and-feel alloy:slider)
   ((:background simple:rectangle)
    (ecase (alloy:orientation alloy:renderable)
-     (:horizontal (alloy:extent 0 (alloy:ph 0.4) (alloy:pw) (alloy:ph 0.2)))
-     (:vertical (alloy:extent (alloy:pw 0.4) 0 (alloy:pw 0.2) (alloy:ph)))))
+     (:horizontal (alloy:extent 0 (alloy:ph 0.4f0) (alloy:pw) (alloy:ph 0.2f0)))
+     (:vertical (alloy:extent (alloy:pw 0.4f0) 0 (alloy:pw 0.2f0) (alloy:ph)))))
   ((:border simple:rectangle)
    (alloy:margins -3)
    :line-width (alloy:un 1))
@@ -230,9 +230,9 @@
   ((:background simple:ellipse)
    (alloy:extent 0 0 (alloy:ph 1) (alloy:ph 1)))
   ((:inner simple:ellipse)
-   (alloy:extent (alloy:ph 0.1) (alloy:ph 0.1) (alloy:ph 0.8) (alloy:ph 0.8)))
+   (alloy:extent (alloy:ph 0.1f0) (alloy:ph 0.1f0) (alloy:ph 0.8f0) (alloy:ph 0.8f0)))
   ((:border simple:ellipse)
-   (alloy:extent (alloy:ph -0.1) (alloy:ph -0.1) (alloy:ph 1.2) (alloy:ph 1.2))
+   (alloy:extent (alloy:ph -0.1f0) (alloy:ph -0.1f0) (alloy:ph 1.2f0) (alloy:ph 1.2f0))
    :line-width (alloy:un 1)))
 
 (define-update (default-look-and-feel alloy:radio)

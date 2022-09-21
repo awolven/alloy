@@ -26,10 +26,10 @@
 
 (defclass renderer ()
   ((allocated-p :initform NIL :reader allocated-p)
-   (visible-bounds :initform (%extent (%px most-negative-single-float)
-                                      (%px most-negative-single-float)
-                                      (%px float-features:single-float-positive-infinity)
-                                      (%px float-features:single-float-positive-infinity)) :accessor visible-bounds)))
+   (visible-bounds :initform (%extent (px most-negative-single-float)
+                                      (px most-negative-single-float)
+                                      (px float-features:single-float-positive-infinity)
+                                      (px float-features:single-float-positive-infinity)) :accessor visible-bounds)))
 
 (defmethod constrain-visibility ((extent extent) (renderer renderer))
   (setf (visible-bounds renderer) (extent-intersection extent (visible-bounds renderer))))

@@ -17,7 +17,7 @@
         (pextent (bounds (parent layout))))
     (setf (y layout) (min (max (+ (pxy extent) (* -20 (dy event)))
                                (- (pxh pextent) (pxh extent)))
-                          0.0))))
+                          0.0f0))))
 
 (defmethod notice-size ((layout combo-layout) (parent (eql T)))
   (let ((ideal (suggest-size (bounds (parent layout)) layout)))
