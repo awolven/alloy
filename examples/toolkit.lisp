@@ -14,10 +14,17 @@
 (defmacro define-example (name args &body body)
   (let ((thunk (gensym "THUNK")))
     `(progn (defun ,name (,@(rest args))
-              (flet ((,thunk (,(first args))
-                       ,@body))
-                (if (boundp '*screen*)
-                    (,thunk *screen*)
-                    (glfw:with-screen (*screen* 'screen :base-scale 2.0)
-                      (,thunk *screen*)))))
-            (pushnew ',name *examples*))))
+	      (sb-int:with-float-traps-masked (:underflow
+					       :overflow
+					       :inexact
+					       :invalid
+					       :divide-by-zero
+					       #+X86 :denormalized-operand)
+	      
+		(flet ((,thunk (,(first args))
+			 ,@body))
+		  (if (boundp '*screen*)
+		      (,thunk *screen*)
+		      (glfw:with-screen (*screen* 'screen :base-scale 2.0)
+					(,thunk *screen*))))))
+	    (pushnew ',name *examples*))))
